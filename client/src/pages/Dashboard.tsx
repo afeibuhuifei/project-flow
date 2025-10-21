@@ -14,7 +14,7 @@ import {
 } from 'antd'
 import {
   ProjectOutlined,
-  TaskOutlined,
+  UnorderedListOutlined,
   CheckCircleOutlined,
   ClockCircleOutlined,
   PlusOutlined,
@@ -161,7 +161,7 @@ const Dashboard: React.FC = () => {
             <Statistic
               title="总任务数"
               value={stats.totalTasks}
-              prefix={<TaskOutlined />}
+              prefix={<UnorderedListOutlined />}
               valueStyle={{ color: '#722ed1' }}
             />
           </Card>
@@ -219,7 +219,7 @@ const Dashboard: React.FC = () => {
               </Button>
               <Button
                 type="default"
-                icon={<TaskOutlined />}
+                icon={<UnorderedListOutlined />}
                 onClick={() => navigate('/tasks')}
                 className="w-full"
               >

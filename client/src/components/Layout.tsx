@@ -12,7 +12,7 @@ import {
 import {
   DashboardOutlined,
   ProjectOutlined,
-  TaskOutlined,
+  UnorderedListOutlined,
   AppstoreOutlined,
   BarChartOutlined,
   FileOutlined,
@@ -49,7 +49,7 @@ const Layout: React.FC = () => {
     },
     {
       key: '/tasks',
-      icon: <TaskOutlined />,
+      icon: <UnorderedListOutlined />,
       label: '任务管理'
     },
     {
