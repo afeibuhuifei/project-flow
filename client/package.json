@@ -17,7 +17,7 @@
     "react-router-dom": "^6.21.1",
     "antd": "^5.12.8",
     "zustand": "^4.4.7",
-    "@gantt-task-react/gantt-task-react": "^0.3.9",
+    "gantt-task-react": "^0.3.9",
     "axios": "^1.6.2",
     "@dnd-kit/core": "^6.1.0",
     "@dnd-kit/sortable": "^8.0.0",

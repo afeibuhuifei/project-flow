@@ -12,9 +12,9 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  username  String   @unique @db.VarChar(50)
-  password  String   @db.VarChar(255)
-  email     String?  @db.VarChar(100)
+  username  String   @unique
+  password  String
+  email     String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -28,11 +28,11 @@ model User {
 
 model Project {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(100)
-  description String?  @db.Text
-  status      String   @default("active") @db.VarChar(20) // active, completed, archived
-  startDate   DateTime? @map("start_date") @db.Date
-  endDate     DateTime? @map("end_date") @db.Date
+  name        String
+  description String?
+  status      String   @default("active") // active, completed, archived
+  startDate   DateTime? @map("start_date")
+  endDate     DateTime? @map("end_date")
   ownerId     Int      @map("owner_id")
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
@@ -46,12 +46,12 @@ model Project {
 
 model Task {
   id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(200)
-  description String?  @db.Text
-  status      String   @default("todo") @db.VarChar(20) // todo, in_progress, completed
-  priority    String   @default("medium") @db.VarChar(10) // low, medium, high, urgent
-  startDate   DateTime? @map("start_date") @db.Date
-  endDate     DateTime? @map("end_date") @db.Date
+  title       String
+  description String?
+  status      String   @default("todo") // todo, in_progress, completed
+  priority    String   @default("medium") // low, medium, high, urgent
+  startDate   DateTime? @map("start_date")
+  endDate     DateTime? @map("end_date")
   progress    Int      @default(0) // 0-100
   projectId   Int      @map("project_id")
   assigneeId  Int?     @map("assignee_id")
@@ -87,11 +87,11 @@ model TaskDependency {
 
 model TaskFile {
   id           Int      @id @default(autoincrement())
-  filename     String   @db.VarChar(255)
-  originalName String   @map("original_name") @db.VarChar(255)
-  filePath     String   @map("file_path") @db.VarChar(500)
+  filename     String
+  originalName String   @map("original_name")
+  filePath     String   @map("file_path")
   fileSize     Int      @map("file_size")
-  mimeType     String   @map("mime_type") @db.VarChar(100)
+  mimeType     String   @map("mime_type")
   taskId       Int      @map("task_id")
   uploadedBy   Int      @map("uploaded_by")
   createdAt    DateTime @default(now()) @map("created_at")
