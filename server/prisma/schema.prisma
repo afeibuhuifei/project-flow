@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(50)
+  password  String   @db.VarChar(255)
+  email     String?  @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  ownedProjects   Project[]   @relation("ProjectOwner")
+  assignedTasks   Task[]      @relation("TaskAssignee")
+  uploadedFiles   TaskFile[]  @relation("FileUploader")
+
+  @@map("users")
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(100)
+  description String?  @db.Text
+  status      String   @default("active") @db.VarChar(20) // active, completed, archived
+  startDate   DateTime? @map("start_date") @db.Date
+  endDate     DateTime? @map("end_date") @db.Date
+  ownerId     Int      @map("owner_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  owner User  @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  tasks Task[]
+
+  @@map("projects")
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(200)
+  description String?  @db.Text
+  status      String   @default("todo") @db.VarChar(20) // todo, in_progress, completed
+  priority    String   @default("medium") @db.VarChar(10) // low, medium, high, urgent
+  startDate   DateTime? @map("start_date") @db.Date
+  endDate     DateTime? @map("end_date") @db.Date
+  progress    Int      @default(0) // 0-100
+  projectId   Int      @map("project_id")
+  assigneeId  Int?     @map("assignee_id")
+  parentTaskId Int?    @map("parent_task_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  project     Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignee    User?           @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  parentTask  Task?           @relation("TaskHierarchy", fields: [parentTaskId], references: [id])
+  subtasks    Task[]          @relation("TaskHierarchy")
+  dependencies TaskDependency[] @relation("TaskDependencies")
+  dependents   TaskDependency[] @relation("DependentTasks")
+  files       TaskFile[]
+
+  @@map("tasks")
+}
+
+model TaskDependency {
+  id               Int      @id @default(autoincrement())
+  taskId           Int      @map("task_id")
+  dependsOnTaskId  Int      @map("depends_on_task_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  // Relations
+  task          Task @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOnTask Task @relation("DependentTasks", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, dependsOnTaskId])
+  @@map("task_dependencies")
+}
+
+model TaskFile {
+  id           Int      @id @default(autoincrement())
+  filename     String   @db.VarChar(255)
+  originalName String   @map("original_name") @db.VarChar(255)
+  filePath     String   @map("file_path") @db.VarChar(500)
+  fileSize     Int      @map("file_size")
+  mimeType     String   @map("mime_type") @db.VarChar(100)
+  taskId       Int      @map("task_id")
+  uploadedBy   Int      @map("uploaded_by")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  task     Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  uploader User @relation("FileUploader", fields: [uploadedBy], references: [id])
+
+  @@map("task_files")
+}
