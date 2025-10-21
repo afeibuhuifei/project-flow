@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "project-flow-frontend",
   "builds": [
     {
       "src": "package.json",
@@ -12,11 +11,14 @@
   ],
   "routes": [
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
   "env": {
-    "VITE_API_BASE_URL": "https://project-flow-server-8g7g8k5s0-feifei-123s-projects.vercel.app/api"
+    "VITE_API_BASE_URL": "http://localhost:3000/api"
   }
 }
