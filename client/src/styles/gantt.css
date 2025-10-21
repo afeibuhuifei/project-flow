@@ -1,0 +1,68 @@
+/* Gantt Task React 自定义样式 */
+.gantt-task-react {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.gantt-task-react .grid-row {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.gantt-task-react .grid-header {
+  background-color: #fafafa;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.gantt-task-react .task-list-header {
+  background-color: #fafafa;
+  border-bottom: 1px solid #d9d9d9;
+  font-weight: 600;
+}
+
+.gantt-task-react .task-list-item {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.gantt-task-react .task-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.gantt-task-react .bar-container {
+  transition: all 0.2s ease;
+}
+
+.gantt-task-react .bar-container:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 自定义滚动条 */
+.gantt-task-react::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.gantt-task-react::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.gantt-task-react::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.gantt-task-react::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .gantt-task-react {
+    font-size: 12px;
+  }
+
+  .gantt-task-react .task-list-item {
+    padding: 4px 8px;
+  }
+}
