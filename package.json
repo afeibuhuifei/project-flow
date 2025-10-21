@@ -23,7 +23,12 @@
     "lint:server": "cd server && npm run lint",
     "test": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm test",
-    "test:server": "cd server && npm test"
+    "test:server": "cd server && npm test",
+    "db:generate": "cd server && npx prisma generate",
+    "db:push": "cd server && npx prisma db push",
+    "db:migrate": "cd server && npx prisma migrate dev",
+    "db:seed": "cd server && npx prisma db seed",
+    "db:studio": "cd server && npx prisma studio"
   },
   "keywords": [
     "project-management",
