@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useEffect } from 'react'
 import { api } from '../services/api'
 
 interface User {
   id: number
   username: string
   email?: string
+  avatar?: string
   createdAt: string
   updatedAt: string
 }
@@ -179,7 +181,7 @@ export const useAuthStore = create<AuthStore>()(
 export const useAuthInit = () => {
   const { checkAuth, loading } = useAuthStore()
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkAuth()
   }, [checkAuth])
 

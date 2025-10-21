@@ -162,7 +162,7 @@ const Layout: React.FC = () => {
           theme="dark"
           mode="inline"
           selectedKeys={getSelectedKeys()}
-          items={menuItems}
+          items={menuItems as any}
           onClick={handleMenuClick}
           className="border-r-0"
         />
