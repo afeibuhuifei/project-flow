@@ -13,7 +13,7 @@ import {
   DashboardOutlined,
   ProjectOutlined,
   TaskOutlined,
-  KanbanOutlined,
+  AppstoreOutlined,
   BarChartOutlined,
   FileOutlined,
   UserOutlined,
@@ -57,7 +57,7 @@ const Layout: React.FC = () => {
     },
     {
       key: 'kanban',
-      icon: <KanbanOutlined />,
+      icon: <AppstoreOutlined />,
       label: '看板视图',
       children: [
         {
